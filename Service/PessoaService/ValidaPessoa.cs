@@ -1,4 +1,5 @@
 ﻿using cadastroPessoas.Models;
+using System.Text.RegularExpressions;
 
 namespace cadastroPessoas.Service.PessoaService
 {
@@ -6,6 +7,7 @@ namespace cadastroPessoas.Service.PessoaService
     {
         public static bool Validar(PessoaModel pessoa, out string mensagemErro)
         {
+            var cpf = pessoa.CPF;
 
             if (string.IsNullOrEmpty(pessoa.Nome))
             {
@@ -16,6 +18,25 @@ namespace cadastroPessoas.Service.PessoaService
             if (!pessoa.Email.Contains("@"))
             {
                 mensagemErro = "E-mail inválido.";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(cpf))
+            {
+                mensagemErro = "Informe o CPF.";
+                return false;
+            }
+
+            if (!Regex.IsMatch(cpf, @"^[\d\.\-]+$"))
+            {
+                mensagemErro = "O CPF deve conter apenas números, pontos e traços.";
+                return false;
+            }
+
+            cpf = Regex.Replace(cpf ?? "", @"[^\d]", "");
+            if (cpf.Length != 11)
+            {
+                mensagemErro = "O CPF deve conter exatamente 11 números.";
                 return false;
             }
 
