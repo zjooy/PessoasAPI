@@ -54,7 +54,7 @@ namespace cadastroPessoas.Service.PessoaService
                 }
 
                 serviceResponse.Dados = pessoa;
-                serviceResponse.Mensagem = "Cadastro localizado com sucesso.";
+                serviceResponse.Mensagem = "Pessoa localizada com sucesso.";
             }
             catch (Exception ex)
             {
@@ -115,13 +115,13 @@ namespace cadastroPessoas.Service.PessoaService
                 if (!ValidaPessoa.Validar(editadoPessoa, out var mensagemErro))
                 {
                     serviceResponse.Dados = null;
-                    serviceResponse.Mensagem = mensagemErro ?? "a";
+                    serviceResponse.Mensagem = mensagemErro;
                     serviceResponse.Sucesso = false;
 
                     return serviceResponse;
                 }
 
-                pessoa.DT_Alteracao = DateTime.Now;
+                editadoPessoa.DT_Alteracao = DateTime.Now;
 
                 _context.Pessoas.Update(editadoPessoa);
                 await _context.SaveChangesAsync();
