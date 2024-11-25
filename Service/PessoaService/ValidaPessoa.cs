@@ -40,9 +40,9 @@ namespace cadastroPessoas.Service.PessoaService
                 return false;
             }
 
-            if (pessoa.DT_Aniversario > DateTime.Now)
+            if (string.IsNullOrEmpty(pessoa.Senha))
             {
-                mensagemErro = "Data de nascimento inválida.";
+                mensagemErro = "Informe uma senha.";
                 return false;
             }
 

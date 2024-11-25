@@ -80,6 +80,8 @@ namespace cadastroPessoas.Service.PessoaService
                     return serviceResponse;
                 }
 
+                novaPessoa.Senha = EncriptaSenha.hashSenha(novaPessoa.Senha);
+
                 _context.Add(novaPessoa);
                 await _context.SaveChangesAsync();
 
@@ -121,6 +123,7 @@ namespace cadastroPessoas.Service.PessoaService
                     return serviceResponse;
                 }
 
+                editadoPessoa.Senha = EncriptaSenha.hashSenha(editadoPessoa.Senha);
                 editadoPessoa.DT_Alteracao = DateTime.Now;
 
                 _context.Pessoas.Update(editadoPessoa);

@@ -9,7 +9,7 @@ namespace cadastroPessoas.Models
         public string Nome { get; set; }
         public string Email { get; set; }
         public string CPF { get; set; }
-        public DateTime DT_Aniversario { get; set; }
+        public string Senha { get; set; }
         public DateTime DT_Cadastro { get; set; } = DateTime.Now;
         public DateTime? DT_Alteracao { get; set; }
     }
